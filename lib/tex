@@ -1,0 +1,20 @@
+#!/bin/bash
+
+run_tex() {
+  if has "texmf"; then
+    echo "Install tex packages..."
+
+    sudo tlmgr update --self --all
+    sudo tlmgr install latexmk
+    cd /usr/local/texlive/2016/texmf-dist/scripts/cjk-gs-integrate
+    sudo perl cjk-gs-integrate.pl --link-texmf --force
+    sudo mktexlsr
+    sudo kanji-config-updmap-sys hiragino-elcapitan-pron
+
+    defaults write TeXShop FixLineNumberScroll NO
+    defaults write TeXShop SourceScrollElasticity NO
+    defaults write TeXShop FixPreviewBlur YES
+
+    echo "$(tput setaf 2)Install TeX packages complete. ✔︎$(tput sgr0)"
+  fi
+}
