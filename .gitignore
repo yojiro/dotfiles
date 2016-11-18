@@ -2,3 +2,13 @@
 *~
 .DS_Store
 
+.config/*
+.emacs.d/*
+
+# whitelist
+!.config/nvim
+!.config/emacs
+!.config/git
+!.emacs.d/Cask
+!.emacs.d/*.el
+
