@@ -21,6 +21,7 @@ Commands:
 
 Arguments:
   -f $(tput setaf 1)** warning **$(tput sgr0) Overwrite dotfiles.
+  -t do tex related operation
   -h Print help (this message)
 EOF
   exit 1
@@ -30,6 +31,9 @@ while getopts :f:h opt; do
   case ${opt} in
     f)
       OVERWRITE=true
+      ;;
+    t)
+      TEX=true
       ;;
     h)
       usage
@@ -86,7 +90,7 @@ link_files() {
 
 initialize() {
   run_brew
-  run_tex
+  [ -n "${TEX}" ] && run_tex
 
   [ ! -d ${HOME}/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 
@@ -103,8 +107,13 @@ initialize() {
     fi
   fi
 
+  if [ -e ${HOME}/.emacs.d/Cask ]; then
+    cd ${HOME}/.emacs.d && cask install
+  fi
+
   echo "$(tput setaf 2)Initialize complete!. ✔︎$(tput sgr0)"
 }
+
 
 command=$1
 [ $# -gt 0 ] && shift
