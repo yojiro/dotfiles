@@ -23,12 +23,14 @@ run_brew() {
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(
+      'ant'
       'autoconf'
       'automake'
       'ansible'
       'aspell --lang=en'
       'bash-completion'
       'ctags'
+      'doxygen'
       'emacs-mac'
       'ffmpeg --with-faac --with-fdk-aac --with-ffplay --with-fontconfig --with-freetype --with-frei0r --with-libass --with-libbluray --with-libcaca --with-libquvi --with-libsoxr --with-libvidstab --with-libvorbis --with-libvpx --with-opencore-amr --with-openjpeg --with-openssl --with-opus --with-rtmpdump --with-speex --with-theora --with-tools --with-x265 --with-webp'
       'fontforge'
@@ -43,7 +45,6 @@ run_brew() {
       'pyenv'
       'pyenv-virtualenv'
       'ricty'
-      'Caskroom/cask/skim'
       'tmux'
       'wget'
       'xz'
@@ -59,6 +60,9 @@ run_brew() {
       else
         echo "Installed ${formula}"
         [[ "${formula}" = "ricty" ]] && local installed_ricty=true
+        [[ "${formula}" = "ansible" ]] && local installed_ansible=true
+        [[ "${formula}" = "emacs-mac" ]] && local installed_emacs_mac=true
+        [[ "${formula}" = "jq" ]] && local installed_jq=true
       fi
     done
 
@@ -74,8 +78,20 @@ run_brew() {
     # post processes 
     #ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
     #ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-    brew linkapps emacs-mac
-    
+    brew link jq
+
+    if [ -z "${installed_ansible}"  ]; then
+    	brew link --overwrite ansible
+    fi
+
+    if [ -z "${installed_emacs_mac}"  ]; then
+    	brew linkapps emacs-mac
+    	brew link --overwrite emacs-mac
+    fi
+
+    if [ -z "${installed_jq}"  ]; then
+    	brew link --overwrite jq
+    fi
 
     if [ -z "${installed_ricty}"  ]; then
       echo "Reload fonts. This could take a while..."
@@ -92,6 +108,7 @@ run_brew() {
       'google-drive'
       'mactex'
       'slack'
+      'skim'
       'vagrant'
       'virtualbox'
       'xquartz'
@@ -121,5 +138,8 @@ run_brew() {
     echo "Cleanup Homebrew..."
     brew cleanup
     echo "$(tput setaf 2)Cleanup Homebrew complete. ✔︎$(tput sgr0)"
+    brew doctor
+    echo "$(tput setaf 2)check Homebrew doctor complete. ✔︎$(tput sgr0)"
+
   fi
 }
