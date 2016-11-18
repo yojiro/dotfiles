@@ -78,7 +78,6 @@ run_brew() {
     # post processes 
     #ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
     #ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-    brew link jq
 
     if [ -z "${installed_ansible}"  ]; then
     	brew link --overwrite ansible
