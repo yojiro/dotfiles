@@ -17,5 +17,7 @@ eval "$(rbenv init -)"
 alias coizmosd='ssh yuo@202.32.183.171 -p 10011'
 alias mc5n0501='ssh yuo@202.32.183.171 -p 20022'
 
+alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH 
 export PATH=/usr/local/texlive/2016/bin/x86_64-darwin:$PATH 
