@@ -21,5 +21,11 @@ $ bash -c "$(curl -fsSL raw.github.com/yojiro/dotfiles/master/dotfiles.sh)"
 ## update dotfiles
 
 ```
-~/dotfiles/dotfiles.sh -f deploy
+~/dotfiles/dotfiles.sh deploy
+```
+
+or, with force option
+
+```
+~/dotfiles/dotfiles.sh -fs deploy
 ```
