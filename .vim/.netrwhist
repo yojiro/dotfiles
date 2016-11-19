@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/yuo/Documents/Virtual Machines.localized/OpenBSD.vmwarevm'
+let g:netrw_dirhist_2='/Users/yuo/Work/plc_query/melsec'
+let g:netrw_dirhist_3='/Users/yuo/Work/Ansible/AddUserKey/vars'
+let g:netrw_dirhist_4='/Users/yuo/Work/Press/SerialSensors/serial_sensor'
