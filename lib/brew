@@ -103,6 +103,7 @@ run_brew() {
 
     local -a missing_formulae=()
     local -a desired_formulae=(
+      'atom'
       'dropbox'
       'firefox'
       'google-chrome'
