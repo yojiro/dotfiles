@@ -27,4 +27,5 @@
 (setq reftex-plug-into-AUCTeX t)
 (setq reftex-default-bibliography '(
          "~/dotfiles/bib/bib_01.bib"
-         ;; ...))
+         ;; ...
+))

@@ -19,6 +19,7 @@
 (depends-on "auctex")
 (depends-on "auctex-latexmk")
 (depends-on "auto-complete-auctex")
+;(depends-on "yatex")
 
 ;; dictionary
 (depends-on "osx-dictionary")
@@ -34,7 +35,7 @@
 ;; markdown
 (depends-on "markdown-mode")
 
-;; 
+;;
 (depends-on "flycheck")
 (depends-on "flycheck-cask")
 
