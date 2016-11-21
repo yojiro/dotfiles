@@ -24,10 +24,10 @@ run_brew() {
     local -a missing_formulae
     local -a desired_formulae=(
       'ant'
-      'autoconf'
-      'automake'
       'ansible'
       'aspell --lang=en'
+      'autoconf'
+      'automake'
       'bash-completion'
       'cask'
       'ctags'
@@ -47,6 +47,7 @@ run_brew() {
       'pyenv'
       'pyenv-virtualenv'
       'ricty --vim-powerline --powerline'
+      'rbenv'
       'tmux'
       'wget'
       'xz'
@@ -141,7 +142,7 @@ run_brew() {
     echo "Cleanup Homebrew..."
     brew cleanup
     echo "$(tput setaf 2)Cleanup Homebrew complete. ✔︎$(tput sgr0)"
-    brew doctor
+    env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew doctor
     echo "$(tput setaf 2)check Homebrew doctor complete. ✔︎$(tput sgr0)"
 
   fi
