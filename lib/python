@@ -1,0 +1,39 @@
+#!/bin/bash
+
+latest() {
+  local version=$1
+  echo `pyenv install --list | grep -v - | grep -oe ${version}'\.\d\.\d*$' | tail -n 1`
+}
+
+cur_version() {
+  local version=$1
+  echo `pyenv versions | grep -oe ${version}'\.\d\{1,\}\.\d\{1,\}\([ ]\|$\)' | tail -n 1 | tr -d "[:space:]"`
+}
+
+setup_pyenv() {
+  local target=$1
+  local nvim='neovim'${target%%.*}
+  PYTHON_CONFIGURE_OPTS="--enable-framework"
+  PYENV_VIRTUALENV_DISABLE_PROMPT=1
+  pyenv install ${target}
+  pyenv global ${target}
+  pyenv virtualenv -f ${target} ${nvim}
+  pyenv activate ${nvim}
+  pip install --upgrade pip
+  pip install neovim
+  pip install epc
+}
+
+run_python() {
+  if has "pyenv"; then
+    for python_version in 3 2; do   
+      latest=`latest ${python_version}`
+      current=`cur_version ${python_version}`
+      echo "$(tput setaf 2)pyenv for python${python_version}: latest:${latest}, current:${current}$(tput sgr0)"
+      if [ X${current:-x} != X${latest} ]; then
+        setup_pyenv ${latest}
+      fi
+    done
+  fi
+}
+

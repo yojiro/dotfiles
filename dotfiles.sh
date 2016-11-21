@@ -71,6 +71,7 @@ fi
 cd ${DOT_DIRECTORY}
 source ./lib/atom
 source ./lib/brew
+source ./lib/python
 source ./lib/tex
 
 link_files() {
@@ -98,33 +99,7 @@ initialize() {
 
   [ ! -d ${HOME}/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 
-  if has "pyenv"; then
-    latest3=`pyenv install --list | grep -v - | grep -oe '3\.\d\.\d*$' | tail -n 1`
-    latest2=`pyenv install --list | grep -v - | grep -oe '2\.\d\.\d*$' | tail -n 1`
-    current3=`pyenv versions | grep -oe '3\.\d\{1,\}\.\d\{1,\}\([ ]\|$\)' | tail -n 1 | tr -d "[:space:]"`
-    current2=`pyenv versions | grep -oe '2\.\d\{1,\}\.\d\{1,\}\([ ]\|$\)' | tail -n 1 | tr -d "[:space:]"`
-    if [ ${current3:-x} != ${latest3} ]; then
-      PYTHON_CONFIGURE_OPTS="--enable-framework"
-      PYENV_VIRTUALENV_DISABLE_PROMPT=1
-      pyenv install ${latest3}
-      pyenv global ${latest3}
-      pyenv virtualenv -f ${latest3} neovim3
-      pyenv activate neovim3
-      pip install --upgrade pip
-      pip install neovim
-      pip install epc
-    fi
-    if [ ${current2:-x} != ${latest2} ]; then
-      PYTHON_CONFIGURE_OPTS="--enable-framework"
-      PYENV_VIRTUALENV_DISABLE_PROMPT=1
-      pyenv install ${latest2}
-      pyenv virtualenv -f ${latest2} neovim2
-      pyenv activate neovim2
-      pip install --upgrade pip
-      pip install neovim
-      pip install epc
-    fi
-  fi
+  run_python
 
   if [ -e ${HOME}/.emacs.d/Cask ]; then
     cd ${HOME}/.emacs.d && cask install
