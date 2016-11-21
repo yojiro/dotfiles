@@ -69,6 +69,7 @@ if [ ! -d ${DOT_DIRECTORY} ]; then
 fi
 
 cd ${DOT_DIRECTORY}
+source ./lib/atom
 source ./lib/brew
 source ./lib/tex
 
@@ -90,13 +91,16 @@ link_files() {
 
 initialize() {
   run_brew
+  echo "atom"
+  [ -d ${HOME}/.atom ] && run_atom
+  echo "tex"
   [ -n "${TEX}" ] && run_tex
 
   [ ! -d ${HOME}/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 
   if has "pyenv"; then
-    latest3=`pyenv install --list | grep -v - | grep -oe '3\.\d\.\d$' | tail -n 1`
-    latest2=`pyenv install --list | grep -v - | grep -oe '2\.\d\.\d$' | tail -n 1`
+    latest3=`pyenv install --list | grep -v - | grep -oe '3\.\d\.\d*$' | tail -n 1`
+    latest2=`pyenv install --list | grep -v - | grep -oe '2\.\d\.\d*$' | tail -n 1`
     current3=`pyenv versions | grep -oe '3\.\d\{1,\}\.\d\{1,\}\([ ]\|$\)' | tail -n 1 | tr -d "[:space:]"`
     current2=`pyenv versions | grep -oe '2\.\d\{1,\}\.\d\{1,\}\([ ]\|$\)' | tail -n 1 | tr -d "[:space:]"`
     if [ ${current3:-x} != ${latest3} ]; then

@@ -1,0 +1,57 @@
+#!/bin/bash
+
+run_atom() {
+  if has "apm"; then
+    echo "Updating Atom setting"
+
+    apm upgrade
+    [[ $? ]] && echo "$(tput setaf 2)Update Atom package complete. ✔︎$(tput sgr0)"
+    local list_packages
+    local -a missing_packages
+    local -a desired_packages=(
+      'emacs-plus'
+      'file-icons'
+      'git-plus'
+      'language-latex'
+      'latex'
+      'latexer'
+      'latextools'
+      'markdown-writer'
+      'markdown-preview-plus'
+      'mathjax-wrapper'
+      'open-recent'
+      'pdf-view'
+    )
+
+    local installed=`apm list --installed --bare`
+
+    for index in ${!desired_packages[*]}
+    do
+      local package=`echo ${desired_packages[$index]} | cut -d' ' -f 1`
+      if [[ -z `echo "${installed}" | grep "^${package}\@\d*"` ]]; then
+        missing_packages=("${missing_packages[@]}" "${desired_packages[$index]}")
+      else
+        echo "Installed ${package}"
+        [[ "${package}" = "latex" ]] && local installed_latex=true
+      fi
+    done
+
+    if [[ "$missing_packages" ]]; then
+      list_packages=$( printf "%s " "${missing_packages[@]}" )
+
+      echo "Installing missing Atom packages..."
+      apm install $list_packages
+
+      [[ $? ]] && echo "$(tput setaf 2)Installed missing packages ✔︎$(tput sgr0)"
+    fi
+
+    if [ -z "${installed_latex}"  ]; then
+      echo "latex packge setup"
+      echo "TBD"
+    fi
+
+    echo "Cleanup apm..."
+    apm clean
+    echo "$(tput setaf 2)Cleanup apm packages complete. ✔︎$(tput sgr0)"
+  fi
+}
