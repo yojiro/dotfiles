@@ -1,10 +1,3 @@
-# The next line updates PATH for the Google Cloud SDK.
-source '/Users/yuo/google-cloud-sdk/path.bash.inc'
-
-# The next line enables bash completion for gcloud.
-source '/Users/yuo/google-cloud-sdk/completion.bash.inc'
-
-
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
@@ -22,6 +15,10 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 	    . $(brew --prefix)/etc/bash_completion
 fi
 source ~/.git-completion.bash
+
+# for Google Cloud SDK
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
 
 # aliases
 alias coizmosd='ssh yuo@202.32.183.171 -p 10011'
