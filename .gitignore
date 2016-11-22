@@ -1,6 +1,7 @@
 *.swp
 *~
 .DS_Store
+.python-version
 
 .config/*
 .emacs.d/*
