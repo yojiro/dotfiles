@@ -116,6 +116,9 @@ case ${command} in
   deploy)
     link_files
     ;;
+  py*)
+    run_python
+    ;;
   init*)
     initialize
     ;;

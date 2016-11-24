@@ -31,6 +31,7 @@ run_pip() {
   fi
   pip install -q -r ./var/${target}-pip.txt
   pyenv local --unset
+  echo "$(tput setaf 2)Pip update for ${target}. ✔︎$(tput sgr0)"
 }
 
 run_python() {
