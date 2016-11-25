@@ -12,6 +12,7 @@ run_atom() {
       'emacs-plus'
       'file-icons'
       'git-plus'
+      'github-atom-light-syntax'
       'language-latex'
       'latex'
       'latexer'
@@ -32,7 +33,7 @@ run_atom() {
         missing_packages=("${missing_packages[@]}" "${desired_packages[$index]}")
       else
         echo "Installed ${package}"
-        [[ "${package}" = "latex" ]] && local installed_latex=true
+        [[ "${package}" = "markdown-preview-plus" ]] && local installed_mdp=true
       fi
     done
 
@@ -45,9 +46,8 @@ run_atom() {
       [[ $? ]] && echo "$(tput setaf 2)Installed missing packages ✔︎$(tput sgr0)"
     fi
 
-    if [ -z "${installed_latex}"  ]; then
-      echo "latex packge setup"
-      echo "TBD"
+    if [ -z "${installed_mdp}"  ]; then
+      apm disable markdown-preview
     fi
 
     echo "Cleanup apm..."
