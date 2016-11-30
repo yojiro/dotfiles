@@ -10,6 +10,7 @@ run_atom() {
     local -a missing_packages
     local -a desired_packages=(
       'emacs-plus'
+      'document-outline'
       'file-icons'
       'git-plus'
       'github-atom-light-syntax'
