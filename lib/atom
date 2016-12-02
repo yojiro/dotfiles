@@ -15,6 +15,7 @@ run_atom() {
       'git-plus'
       'github-atom-light-syntax'
       'language-latex'
+      'language-markdown'
       'latex'
       'latexer'
       'latextools'
