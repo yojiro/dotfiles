@@ -9,8 +9,10 @@ run_atom() {
     local list_packages
     local -a missing_packages
     local -a desired_packages=(
-      'emacs-plus'
+      'atom-clock'
+      'atom-html-preview'
       'document-outline'
+      'emacs-plus'
       'file-icons'
       'git-plus'
       'github-atom-light-syntax'
@@ -18,8 +20,8 @@ run_atom() {
       'latex'
       'latexer'
       'latextools'
-      'markdown-writer'
       'markdown-preview-plus'
+      'markdown-writer'
       'mathjax-wrapper'
       'open-recent'
       'pdf-view'
