@@ -22,8 +22,7 @@ source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.i
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
 
 # aliases
-alias coizmosd='ssh yuo@202.32.183.171 -p 10011'
-alias mc5n0501='ssh yuo@202.32.183.171 -p 20022'
 alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
 alias emacsnw='env TERM="xterm-256color" emacs'
+source ~/.bash_profile_secret
 
