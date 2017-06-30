@@ -17,7 +17,6 @@ run_brew() {
     brew tap 'sanemat/font'
     brew tap 'neovim/neovim'
     brew tap 'railwaycat/emacsmacport'
-    brew tap 'peco/peco'
     brew tap 'homebrew/dupes'
 
     local list_formulae
@@ -43,7 +42,6 @@ run_brew() {
       'minicom'
       'openssl'
       'pandoc'
-      'peco'
       'pyenv'
       'pyenv-virtualenv'
       'ricty --vim-powerline --powerline'
