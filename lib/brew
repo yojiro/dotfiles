@@ -117,6 +117,7 @@ run_brew() {
       'vagrant'
       'virtualbox'
       'xquartz'
+      'java'
     )
     # cask
     local installed=`brew cask list`
