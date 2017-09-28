@@ -107,7 +107,6 @@ run_brew() {
       'firefox'
       'google-chrome'
       'google-cloud-sdk'
-      'google-drive'
       'iterm2'
       'mactex'
       'slack'
