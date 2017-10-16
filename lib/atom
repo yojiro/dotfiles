@@ -11,6 +11,7 @@ run_atom() {
     local -a desired_packages=(
       'atom-clock'
       'atom-html-preview'
+      'advanced-open-file'
       'build'
       'document-outline'
       'emacs-plus'
