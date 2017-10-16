@@ -11,6 +11,7 @@ run_atom() {
     local -a desired_packages=(
       'atom-clock'
       'atom-html-preview'
+      'build'
       'document-outline'
       'emacs-plus'
       'file-icons'
@@ -20,7 +21,6 @@ run_atom() {
       'language-markdown'
       'latex'
       'latexer'
-      'latextools'
       'markdown-preview-plus'
       'markdown-writer'
       'mathjax-wrapper'
