@@ -46,6 +46,7 @@ run_brew() {
       'pyenv-virtualenv'
       'ricty --vim-powerline --powerline'
       'rbenv'
+      'sshfs'
       'tmux'
       'wget'
       'xz'
@@ -115,6 +116,7 @@ run_brew() {
       'virtualbox'
       'xquartz'
       'java'
+      'osxfuse'
     )
     # cask
     local installed=`brew cask list`
