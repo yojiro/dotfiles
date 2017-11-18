@@ -39,6 +39,7 @@ run_brew() {
       'jq'
       'nkf'
       'neovim'
+      'node'
       'minicom'
       'openssl'
       'pandoc'
