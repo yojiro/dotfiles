@@ -3,7 +3,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH 
-export PATH=/usr/local/texlive/2016/bin/x86_64-darwin:$PATH 
+export PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH 
 
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
@@ -24,5 +24,8 @@ source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.
 # aliases
 alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
 alias emacsnw='env TERM="xterm-256color" emacs'
+alias ipmi='ipmitool -U admin -P admin -I lanplus'
 source ~/.bash_profile_secret
 
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
