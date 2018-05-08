@@ -4,12 +4,14 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH 
 export PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH 
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 eval "$(rbenv init -)"
+
 
 # comletion setup
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
