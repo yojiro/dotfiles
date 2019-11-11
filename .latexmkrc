@@ -1,4 +1,4 @@
-$latex  = 'uplatex -src-specials -synctex=1 -interaction=nonstopmode';
+$latex  = 'uplatex -kanji=utf8 -file-line-error -src-specials -synctex=1 -interaction=nonstopmode';
 $pdflatex  = 'uplatex -src-specials -interaction=nonstopmode';
 $bibtex = 'upbibtex';
 

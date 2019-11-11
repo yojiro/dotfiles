@@ -69,10 +69,10 @@ if [ ! -d ${DOT_DIRECTORY} ]; then
 fi
 
 cd ${DOT_DIRECTORY}
-source ./lib/atom
+#source ./lib/atom
 source ./lib/brew
 source ./lib/python
-source ./lib/tex
+#source ./lib/tex
 
 link_files() {
   for f in .??*
@@ -92,18 +92,18 @@ link_files() {
 
 initialize() {
   run_brew
-  echo "atom"
-  [ -d ${HOME}/.atom ] && run_atom
-  echo "tex"
-  [ -n "${TEX}" ] && run_tex
+#  echo "atom"
+#  [ -d ${HOME}/.atom ] && run_atom
+#  echo "tex"
+#  [ -n "${TEX}" ] && run_tex
 
   [ ! -d ${HOME}/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 
   run_python
 
-  if [ -e ${HOME}/.emacs.d/Cask ]; then
-    cd ${HOME}/.emacs.d && cask install
-  fi
+#  if [ -e ${HOME}/.emacs.d/Cask ]; then
+#    cd ${HOME}/.emacs.d && cask install
+#  fi
 
   echo "$(tput setaf 2)Initialize complete!. ✔︎$(tput sgr0)"
 }
