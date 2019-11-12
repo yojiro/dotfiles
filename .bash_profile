@@ -12,13 +12,11 @@ export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 
 # comletion setup
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	    . $(brew --prefix)/etc/bash_completion
-fi
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 source ~/.git-completion.bash
 
 # for Google Cloud SDK
