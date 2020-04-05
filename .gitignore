@@ -10,6 +10,7 @@
 !.config/nvim
 !.config/emacs
 !.config/git
+!.config/alacritty
 !.emacs.d/Cask
 !.emacs.d/*.el
 
