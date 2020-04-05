@@ -13,34 +13,33 @@ run_brew() {
     brew update && brew upgrade
     [[ $? ]] && echo "$(tput setaf 2)Update Homebrew complete. ✔︎$(tput sgr0)"
 
-    brew tap 'caskroom/cask'
+    #brew tap 'homebrew/cask-cask'
     brew tap 'sanemat/font'
+    brew tap 'homebrew/cask-fonts'
     brew tap 'neovim/neovim'
-    brew tap 'railwaycat/emacsmacport'
-    brew tap 'homebrew/dupes'
+    #brew tap 'railwaycat/emacsmacport'
+    #brew tap 'homebrew/dupes'
 
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(
-      'ant'
       'ansible'
-      'aspell --lang=en'
+      'aspell'
       'autoconf'
       'automake'
       'bash-completion'
       'cairo'
       'cask'
-      'chromedriver'
+      #'chromedriver'
       'clang-format'
       'coreutils'
       'ctags'
       'doxygen'
-      #'emacs-mac'
-      'ffmpeg --with-faac --with-fdk-aac --with-ffplay --with-fontconfig --with-freetype --with-frei0r --with-libass --with-libbluray --with-libcaca --with-libquvi --with-libsoxr --with-libvidstab --with-libvorbis --with-libvpx --with-opencore-amr --with-openjpeg --with-openssl --with-opus --with-rtmpdump --with-speex --with-theora --with-tools --with-x265 --with-webp'
+      'ffmpeg' 
       'fontforge'
       'gmp'
       'gnupg'
-      'gnutils'
+      'gnutls'
       'go'
       'iperf3'
       'ipmitool'
@@ -55,10 +54,10 @@ run_brew() {
       'pango'
       'pyenv'
       'pyenv-virtualenv'
-      'ricty --vim-powerline --powerline'
+      'ricty --with-powerline'
       #'rbenv'
-      'selenium-server-standalone'
-      'sshfs'
+      #'selenium-server-standalone'
+      #'sshfs'
       'sshuttle'
       'telnet'
       'tmux'
@@ -78,7 +77,6 @@ run_brew() {
         echo "Installed ${formula}"
         [[ "${formula}" = "ricty" ]] && local installed_ricty=true
         [[ "${formula}" = "ansible" ]] && local installed_ansible=true
-        [[ "${formula}" = "emacs-mac" ]] && local installed_emacs_mac=true
         [[ "${formula}" = "jq" ]] && local installed_jq=true
       fi
     done
@@ -100,39 +98,34 @@ run_brew() {
     	brew link --overwrite ansible
     fi
 
-    if [ -z "${installed_emacs_mac}"  ]; then
-    	brew linkapps emacs-mac
-    	brew link --overwrite emacs-mac
-    fi
-
     if [ -z "${installed_jq}"  ]; then
     	brew link --overwrite jq
     fi
 
     if [ -z "${installed_ricty}"  ]; then
       echo "Reload fonts. This could take a while..."
-      local cellar=`brew --config | grep 'HOMEBREW_CELLAR' | cut -d' ' -f 2`
-      find ${cellar}/ricty/*/share/fonts/Ricty*.ttf | xargs -I % cp % ~/Library/Fonts
+
+      find /usr/local/opt/ricty/share/fonts/Ricty*.ttf | xargs -I % cp % ~/Library/Fonts
       fc-cache -vf
     fi
 
     local -a missing_formulae=()
     local -a desired_formulae=(
       #'atom'
-      'dropbox'
+      #'dropbox'
       #'firefox'
-      'google-chrome'
+      #'google-chrome'
       'google-cloud-sdk'
-      'iterm2'
+      #'iterm2'
       #'java'
       #'mactex'
-      'slack'
+      #'slack'
       'skim'
       'vagrant'
       'virtualbox'
       'wireshark'
       'xquartz'
-      'osxfuse'
+      #'osxfuse'
     )
     # cask
     local installed=`brew cask list`

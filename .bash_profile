@@ -16,9 +16,7 @@ eval "$(pyenv virtualenv-init -)"
 
 
 # comletion setup
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	    . $(brew --prefix)/etc/bash_completion
-fi
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 source ~/.git-completion.bash
 
 # for Google Cloud SDK
