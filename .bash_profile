@@ -28,6 +28,7 @@ source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.
 #alias emacsnw='env TERM="xterm-256color" emacs'
 alias ipmi='ipmitool -I lanplus'
 #source ~/.bash_profile_secret
+alias giste='LANG=UTF-8 GITHUB_URL=https://github.pfidev.jp/ gist -c'
 
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
@@ -42,3 +43,16 @@ if [ -z "$SSH_AGENT_PID" ] || ! kill -0 $SSH_AGENT_PID; then
     . ~/.ssh-agent
 fi
 ssh-add -l >& /dev/null || ssh-add
+
+export PATH="$HOME/.poetry/bin:$PATH"
+export JCNAME='yuo'
+export PFKUBE_MNJG2_DEFAULT_DOCKER_CRED_NAME=pfkube-harbor-cred  # This is used when --target-cluster=mnjg2
+
+alias kubectl='pf kubectl'
+alias pfkube='pf pfkube'
+alias pftaskqueue='pf pftaskqueue'
+alias git-ghost='pf git-ghost'
+alias pfbuild='pf pfbuild'
+alias hdfs='pf hdfs'
+
+source ~/.bashrc
