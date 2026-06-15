@@ -46,7 +46,7 @@ git clone git@github.com:yojiro/dotfiles.git ~/dotfiles
 
 **Homebrew formulae:** autossh, clang-format, cmake, colima, coreutils, docker, docker-compose, gh, git, glow, gnupg, go, im-select, ipmitool, jq, krew, kubernetes-cli, mdcat, mosh, nkf, openssl, pandoc, python@3.14, ripgrep, telnet, tmux, tmux-xpanes, uv, wget
 
-**Homebrew casks:** codex, font-hackgen-nerd, font-plemol-jp-nf, font-ricty-diminished, font-udev-gothic-nf, ghostty, hammerspoon, iterm2, karabiner-elements, ollama-app, tailscale-app, zoom
+**Homebrew casks:** cloudflare-warp, codex, font-hackgen-nerd, font-plemol-jp-nf, font-ricty-diminished, font-udev-gothic-nf, ghostty, hammerspoon, iterm2, karabiner-elements, ollama-app, tailscale-app, visual-studio-code, zoom
 
 **Extras (lib/extras):** claude (curl installer), github-mcp-server (GitHub Releases), volta (curl installer), @google/gemini-cli, @openai/codex, cccost, ccusage (npm globals)
 

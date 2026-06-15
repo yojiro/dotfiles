@@ -75,9 +75,11 @@ run_brew() {
       'ghostty'
       'hammerspoon'
       'iterm2'
+      'cloudflare-warp'
       'karabiner-elements'
       'ollama-app'
       'tailscale-app'
+      'visual-studio-code'
       'zoom'
     )
 
