@@ -72,6 +72,14 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      defaults = {
+        vimgrep_arguments = {
+          "rg", "--color=never", "--no-heading", "--with-filename",
+          "--line-number", "--column", "--smart-case",
+        },
+      },
+    },
     keys = {
       { "<C-u><C-p>", function() require("telescope.builtin").find_files() end },
       { "<C-u><C-j>", function() require("telescope.builtin").current_buffer_fuzzy_find() end },
@@ -219,5 +227,6 @@ require("lazy").setup({
 
 -- Colorscheme
 vim.cmd.syntax("on")
-vim.cmd.colorscheme("yuo8")
+local ok, _ = pcall(vim.cmd.colorscheme, "yuo8")
+if not ok then vim.cmd.colorscheme("default") end
 vim.api.nvim_set_hl(0, "CursorLine", { fg = "#E19972" })

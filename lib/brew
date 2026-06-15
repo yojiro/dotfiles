@@ -16,10 +16,8 @@ run_brew() {
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(
-      'autoconf'
-      'automake'
       'coreutils'
-      'ctags'
+      'git'
       'glow'
       'gnupg'
       'go'
@@ -27,13 +25,13 @@ run_brew() {
       'jq'
       'neovim'
       'nkf'
-      'ripgrep'
       'openssl'
       'pandoc'
-      'uv'
+      'ripgrep'
       'telnet'
       'tmux'
       'tmux-xpanes'
+      'uv'
       'wget'
     )
 
@@ -89,7 +87,7 @@ run_brew() {
     echo "Cleanup Homebrew..."
     brew cleanup
     echo "$(tput setaf 2)Cleanup Homebrew complete. ✔︎$(tput sgr0)"
-    env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew doctor
+    brew doctor
     echo "$(tput setaf 2)check Homebrew doctor complete. ✔︎$(tput sgr0)"
 
   fi

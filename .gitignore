@@ -9,7 +9,6 @@
 # whitelist
 !.config/nvim
 !.config/git
-!.config/alacritty
 !.config/karabiner
 !.config/ghostty
 !.config/gh

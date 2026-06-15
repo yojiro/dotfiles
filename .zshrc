@@ -26,8 +26,9 @@ export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 export PIPENV_VENV_IN_PROJECT=1
 
 if [[ -o interactive ]]; then
-  zstyle ':completion:*:*:git:*' script /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.zsh
-  source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+  local _xcode_git="$(xcode-select -p 2>/dev/null)/usr/share/git-core"
+  [[ -f "$_xcode_git/git-completion.zsh" ]] && zstyle ':completion:*:*:git:*' script "$_xcode_git/git-completion.zsh"
+  [[ -f "$_xcode_git/git-prompt.sh" ]]      && source "$_xcode_git/git-prompt.sh"
   bindkey -e
 
   # Ghostty の場合のみ Focus Reporting を制御する
@@ -48,9 +49,10 @@ if [[ -o interactive ]]; then
     add-zsh-hook zshexit _focus_off
   fi
 
-  if command -v im-select > /dev/null 2>&1; then
+  local _imselect="$(command -v im-select)"
+  if [[ -n "$_imselect" ]]; then
     _reset_ime_on_focus() {
-      /opt/homebrew/bin/im-select com.apple.keylayout.ABC
+      "$_imselect" com.apple.keylayout.ABC
       [[ -n "$widgets" ]] && zle .reset-prompt
     }
     zle -N focus-in _reset_ime_on_focus
@@ -62,11 +64,8 @@ if [[ -o interactive ]]; then
   }
 fi
 
-if command -v pyenv > /dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
 alias ipmi='ipmitool -I lanplus'
+alias vim='nvim'
 
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
