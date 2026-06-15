@@ -9,7 +9,7 @@ macOS (Apple Silicon) dotfiles. Scripts symlink everything into `~` so a new Mac
 ## Setup commands
 
 ```sh
-# Full install (Homebrew + apps + Python venv)
+# Full install (Homebrew + extras)
 ~/dotfiles/dotfiles.sh initialize
 
 # Symlink dotfiles into ~
@@ -51,3 +51,16 @@ When `$CLAUDECODE` is set, `.zshrc` returns early after setting only `PATH`. No 
 ## Adding Homebrew packages
 
 Edit the `desired_formulae` or cask array in `lib/brew`. The `initialize` command installs only what's missing.
+
+## Adding non-Homebrew tools (`lib/extras`)
+
+`lib/extras` handles tools installed outside Homebrew, called from `initialize` (also runnable standalone as `dotfiles.sh extras`):
+
+| tool | method |
+|---|---|
+| Claude CLI | `curl -fsSL https://claude.ai/install.sh \| bash` → `~/.local/bin/` |
+| github-mcp-server | `gh release download` from `github/github-mcp-server` → `~/.local/bin/` |
+| Volta | `curl https://get.volta.sh \| bash` |
+| npm globals | `npm install -g` via Homebrew npm |
+
+To add an npm global, append to `desired_packages` in `_install_npm_globals`. To add a new binary tool, add a `_install_<name>()` function and call it from `run_extras()`.

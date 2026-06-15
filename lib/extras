@@ -1,0 +1,77 @@
+#!/bin/bash
+
+LOCAL_BIN="${HOME}/.local/bin"
+
+run_extras() {
+  mkdir -p "${LOCAL_BIN}"
+
+  _install_volta
+  _install_claude
+  _install_github_mcp_server
+  _install_npm_globals
+
+  echo "$(tput setaf 2)Extras install complete. ✔︎$(tput sgr0)"
+}
+
+_install_volta() {
+  if has "volta"; then
+    echo "$(tput setaf 2)Already installed volta ✔︎$(tput sgr0)"
+  else
+    echo "Installing Volta..."
+    curl https://get.volta.sh | bash
+  fi
+}
+
+_install_claude() {
+  if has "claude"; then
+    echo "$(tput setaf 2)Already installed claude ✔︎$(tput sgr0)"
+  else
+    echo "Installing Claude CLI..."
+    curl -fsSL https://claude.ai/install.sh | bash
+  fi
+}
+
+_install_github_mcp_server() {
+  if has "github-mcp-server"; then
+    echo "$(tput setaf 2)Already installed github-mcp-server ✔︎$(tput sgr0)"
+  else
+    echo "Installing github-mcp-server..."
+    local tmpdir
+    tmpdir=$(mktemp -d)
+    gh release download \
+      --repo github/github-mcp-server \
+      --pattern "github-mcp-server_Darwin_arm64.tar.gz" \
+      --dir "${tmpdir}"
+    tar -xzf "${tmpdir}/github-mcp-server_Darwin_arm64.tar.gz" -C "${tmpdir}"
+    install -m 755 "${tmpdir}/github-mcp-server" "${LOCAL_BIN}/github-mcp-server"
+    rm -rf "${tmpdir}"
+    echo "$(tput setaf 2)Installed github-mcp-server ✔︎$(tput sgr0)"
+  fi
+}
+
+_install_npm_globals() {
+  local -a desired_packages=(
+    '@google/gemini-cli'
+    '@openai/codex'
+    'cccost'
+    'ccusage'
+  )
+
+  local installed
+  installed=$(npm list -g --depth=0 2>/dev/null)
+
+  local -a missing_packages=()
+  for pkg in "${desired_packages[@]}"; do
+    if echo "${installed}" | grep -q "${pkg}"; then
+      echo "Installed ${pkg}"
+    else
+      missing_packages+=("${pkg}")
+    fi
+  done
+
+  if [[ ${#missing_packages[@]} -gt 0 ]]; then
+    echo "Installing missing npm globals..."
+    npm install -g "${missing_packages[@]}" && \
+      echo "$(tput setaf 2)Installed npm globals ✔︎$(tput sgr0)"
+  fi
+}

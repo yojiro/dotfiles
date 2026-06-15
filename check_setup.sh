@@ -44,6 +44,16 @@ check "hammerspoon cask"      "brew list --cask hammerspoon"
 check "karabiner cask"        "brew list --cask karabiner-elements"
 
 echo ""
+echo "=== Extras ==="
+check "volta installed"            "command -v volta"
+check "claude installed"           "command -v claude"
+check "github-mcp-server installed" "command -v github-mcp-server"
+check "gemini-cli installed"       "command -v gemini"
+check "codex (npm) installed"      "npm list -g @openai/codex 2>/dev/null | grep -q codex"
+check "cccost installed"           "command -v cccost"
+check "ccusage installed"          "command -v ccusage"
+
+echo ""
 echo "=== Shell ==="
 check "zsh git prompt available" "zsh -ic 'type __git_ps1' 2>/dev/null"
 

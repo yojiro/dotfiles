@@ -18,6 +18,7 @@ Usage:
 Commands:
   deploy
   initialize
+  extras
 
 Arguments:
   -f $(tput setaf 1)** warning **$(tput sgr0) Overwrite dotfiles.
@@ -66,6 +67,7 @@ fi
 
 cd ${DOT_DIRECTORY}
 source ./lib/brew
+source ./lib/extras
 
 link_files() {
   for f in .??*
@@ -100,6 +102,7 @@ link_config() {
 
 initialize() {
   run_brew
+  run_extras
 
   [ ! -d ${HOME}/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 
@@ -113,6 +116,9 @@ command=$1
 case ${command} in
   deploy)
     link_files
+    ;;
+  extras)
+    run_extras
     ;;
   init*)
     initialize
