@@ -76,6 +76,7 @@ run_brew() {
       'hammerspoon'
       'iterm2'
       'karabiner-elements'
+      'ollama-app'
       'tailscale-app'
       'zoom'
     )
