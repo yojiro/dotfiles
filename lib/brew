@@ -5,65 +5,33 @@ run_brew() {
     echo "$(tput setaf 2)Already installed Homebrew ✔︎$(tput sgr0)"
   else
     echo "Installing Homebrew..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
   if has "brew"; then
     echo "Updating Homebrew..."
-    brew update && brew upgrade
-    [[ $? ]] && echo "$(tput setaf 2)Update Homebrew complete. ✔︎$(tput sgr0)"
-
-    #brew tap 'homebrew/cask-cask'
-    brew tap 'sanemat/font'
-    brew tap 'homebrew/cask-fonts'
-    brew tap 'neovim/neovim'
-    #brew tap 'railwaycat/emacsmacport'
-    #brew tap 'homebrew/dupes'
+    brew update && brew upgrade && echo "$(tput setaf 2)Update Homebrew complete. ✔︎$(tput sgr0)"
 
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(
-      'ansible'
-      'aspell'
-      'autoconf'
-      'automake'
-      'bash-completion'
-      'cairo'
-      'cask'
-      #'chromedriver'
-      'clang-format'
       'coreutils'
-      'ctags'
-      'doxygen'
-      'ffmpeg' 
-      'fontforge'
-      'gmp'
+      'git'
+      'glow'
       'gnupg'
-      'gnutls'
       'go'
-      'iperf3'
-      'ipmitool'
+      'im-select'
       'jq'
-      'lsusb'
-      'minicom'
       'neovim'
       'nkf'
-      'node'
       'openssl'
       'pandoc'
-      'pango'
-      'pyenv'
-      'pyenv-virtualenv'
-      'ricty --with-powerline'
-      #'rbenv'
-      #'selenium-server-standalone'
-      #'sshfs'
-      'sshuttle'
+      'ripgrep'
       'telnet'
       'tmux'
       'tmux-xpanes'
+      'uv'
       'wget'
-      'xz'
     )
 
     local installed=`brew list`
@@ -75,9 +43,6 @@ run_brew() {
         missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$index]}")
       else
         echo "Installed ${formula}"
-        [[ "${formula}" = "ricty" ]] && local installed_ricty=true
-        [[ "${formula}" = "ansible" ]] && local installed_ansible=true
-        [[ "${formula}" = "jq" ]] && local installed_jq=true
       fi
     done
 
@@ -85,50 +50,17 @@ run_brew() {
       list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
       echo "Installing missing Homebrew formulae..."
-      brew install $list_formulae
-
-      [[ $? ]] && echo "$(tput setaf 2)Installed missing formulae ✔︎$(tput sgr0)"
-    fi
-
-    # post processes 
-    #ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
-    #ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-
-    if [ -z "${installed_ansible}"  ]; then
-    	brew link --overwrite ansible
-    fi
-
-    if [ -z "${installed_jq}"  ]; then
-    	brew link --overwrite jq
-    fi
-
-    if [ -z "${installed_ricty}"  ]; then
-      echo "Reload fonts. This could take a while..."
-
-      find /usr/local/opt/ricty/share/fonts/Ricty*.ttf | xargs -I % cp % ~/Library/Fonts
-      fc-cache -vf
+      brew install $list_formulae && echo "$(tput setaf 2)Installed missing formulae ✔︎$(tput sgr0)"
     fi
 
     local -a missing_formulae=()
     local -a desired_formulae=(
-      #'atom'
-      #'dropbox'
-      #'firefox'
-      #'google-chrome'
-      'google-cloud-sdk'
-      #'iterm2'
-      #'java'
-      #'mactex'
-      #'slack'
-      'skim'
-      'vagrant'
-      'virtualbox'
-      'wireshark'
-      'xquartz'
-      #'osxfuse'
+      'ghostty'
+      'hammerspoon'
+      'karabiner-elements'
     )
-    # cask
-    local installed=`brew cask list`
+
+    local installed=`brew list --cask`
 
     for index in ${!desired_formulae[*]}
     do
@@ -143,16 +75,14 @@ run_brew() {
     if [[ "$missing_formulae" ]]; then
       list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
-      echo "Installing missing Homebrew formulae..."
-      brew cask install $list_formulae
-
-      [[ $? ]] && echo "$(tput setaf 2)Installed missing formulae ✔︎$(tput sgr0)"
+      echo "Installing missing Homebrew casks..."
+      brew install --cask $list_formulae && echo "$(tput setaf 2)Installed missing casks ✔︎$(tput sgr0)"
     fi
 
     echo "Cleanup Homebrew..."
     brew cleanup
     echo "$(tput setaf 2)Cleanup Homebrew complete. ✔︎$(tput sgr0)"
-    env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew doctor
+    brew doctor
     echo "$(tput setaf 2)check Homebrew doctor complete. ✔︎$(tput sgr0)"
 
   fi

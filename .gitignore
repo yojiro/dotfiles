@@ -2,15 +2,19 @@
 *~
 .DS_Store
 .python-version
+.vim/.netrwhist
 
 .config/*
-.emacs.d/*
 
 # whitelist
 !.config/nvim
-!.config/emacs
 !.config/git
-!.config/alacritty
-!.emacs.d/Cask
-!.emacs.d/*.el
+!.config/karabiner
+!.config/ghostty
+!.config/gh
+!.config/glow
+
+.config/gh/hosts.yml
+
+.hammerspoon/Spoons
 

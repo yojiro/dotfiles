@@ -1,8 +1,0 @@
-autopep8
-epc
-neovim 
-pep8
-pip
-pycodestyle
-pyserial
-PyYAML
