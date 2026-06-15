@@ -65,7 +65,6 @@ if [[ -o interactive ]]; then
 fi
 
 alias ipmi='ipmitool -I lanplus'
-alias vim='nvim'
 
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 

@@ -66,7 +66,6 @@ fi
 
 cd ${DOT_DIRECTORY}
 source ./lib/brew
-source ./lib/python
 
 link_files() {
   for f in .??*
@@ -104,8 +103,6 @@ initialize() {
 
   [ ! -d ${HOME}/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 
-  run_python
-
   echo "$(tput setaf 2)Initialize complete!. ✔︎$(tput sgr0)"
 }
 
@@ -116,9 +113,6 @@ command=$1
 case ${command} in
   deploy)
     link_files
-    ;;
-  py*)
-    run_python
     ;;
   init*)
     initialize

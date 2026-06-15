@@ -15,17 +15,29 @@ run_brew() {
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(
+      'autossh'
+      'clang-format'
+      'cmake'
+      'colima'
       'coreutils'
+      'docker'
+      'docker-compose'
+      'gh'
       'git'
       'glow'
       'gnupg'
       'go'
       'im-select'
+      'ipmitool'
       'jq'
-      'neovim'
+      'krew'
+      'kubernetes-cli'
+      'mdcat'
+      'mosh'
       'nkf'
       'openssl'
       'pandoc'
+      'python@3.14'
       'ripgrep'
       'telnet'
       'tmux'
@@ -55,9 +67,17 @@ run_brew() {
 
     local -a missing_formulae=()
     local -a desired_formulae=(
+      'codex'
+      'font-hackgen-nerd'
+      'font-plemol-jp-nf'
+      'font-ricty-diminished'
+      'font-udev-gothic-nf'
       'ghostty'
       'hammerspoon'
+      'iterm2'
       'karabiner-elements'
+      'tailscale-app'
+      'zoom'
     )
 
     local installed=`brew list --cask`
