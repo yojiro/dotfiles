@@ -10,8 +10,7 @@ run_brew() {
 
   if has "brew"; then
     echo "Updating Homebrew..."
-    brew update && brew upgrade
-    [[ $? ]] && echo "$(tput setaf 2)Update Homebrew complete. ✔︎$(tput sgr0)"
+    brew update && brew upgrade && echo "$(tput setaf 2)Update Homebrew complete. ✔︎$(tput sgr0)"
 
     local list_formulae
     local -a missing_formulae
@@ -51,9 +50,7 @@ run_brew() {
       list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
       echo "Installing missing Homebrew formulae..."
-      brew install $list_formulae
-
-      [[ $? ]] && echo "$(tput setaf 2)Installed missing formulae ✔︎$(tput sgr0)"
+      brew install $list_formulae && echo "$(tput setaf 2)Installed missing formulae ✔︎$(tput sgr0)"
     fi
 
     local -a missing_formulae=()
@@ -79,9 +76,7 @@ run_brew() {
       list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
       echo "Installing missing Homebrew casks..."
-      brew install --cask $list_formulae
-
-      [[ $? ]] && echo "$(tput setaf 2)Installed missing casks ✔︎$(tput sgr0)"
+      brew install --cask $list_formulae && echo "$(tput setaf 2)Installed missing casks ✔︎$(tput sgr0)"
     fi
 
     echo "Cleanup Homebrew..."

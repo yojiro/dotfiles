@@ -5,6 +5,7 @@ NVIM_VENV="${HOME}/.local/share/nvim-python"
 run_python() {
   if has "uv"; then
     echo "Setting up neovim Python provider..."
+    uv python install 3
     uv venv --python 3 "${NVIM_VENV}"
     uv pip install --python "${NVIM_VENV}/bin/python" -r ./var/requirements-nvim.txt
     echo "$(tput setaf 2)Python setup complete. ✔︎$(tput sgr0)"

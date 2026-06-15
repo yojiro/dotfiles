@@ -26,7 +26,7 @@ export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 export PIPENV_VENV_IN_PROJECT=1
 
 if [[ -o interactive ]]; then
-  local _xcode_git="$(xcode-select -p 2>/dev/null)/usr/share/git-core"
+  _xcode_git="$(xcode-select -p 2>/dev/null)/usr/share/git-core"
   [[ -f "$_xcode_git/git-completion.zsh" ]] && zstyle ':completion:*:*:git:*' script "$_xcode_git/git-completion.zsh"
   [[ -f "$_xcode_git/git-prompt.sh" ]]      && source "$_xcode_git/git-prompt.sh"
   bindkey -e
@@ -49,7 +49,7 @@ if [[ -o interactive ]]; then
     add-zsh-hook zshexit _focus_off
   fi
 
-  local _imselect="$(command -v im-select)"
+  _imselect="$(command -v im-select)"
   if [[ -n "$_imselect" ]]; then
     _reset_ime_on_focus() {
       "$_imselect" com.apple.keylayout.ABC

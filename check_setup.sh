@@ -57,7 +57,8 @@ check "vim → nvim alias"         "zsh -ic 'alias vim' 2>/dev/null | grep nvim"
 
 echo ""
 echo "=== Neovim ==="
-check "nvim python3 provider" "nvim --headless -c 'checkhealth provider' -c 'qa' 2>&1 | grep -q 'OK'"
+check "nvim starts"           "nvim --headless -c 'qa'"
+check "pynvim version"        "~/.local/share/nvim-python/bin/python -c 'import pynvim; pynvim.__version__'"
 
 echo ""
 echo "=============================="
