@@ -18,12 +18,12 @@ _install_volta() {
     echo "$(tput setaf 2)Already installed volta ✔︎$(tput sgr0)"
   else
     echo "Installing Volta..."
-    curl https://get.volta.sh | bash
+    curl -fsSL https://get.volta.sh | bash
   fi
 }
 
 _install_claude() {
-  if has "claude"; then
+  if has "claude" || [ -x "${LOCAL_BIN}/claude" ]; then
     echo "$(tput setaf 2)Already installed claude ✔︎$(tput sgr0)"
   else
     echo "Installing Claude CLI..."
@@ -32,24 +32,39 @@ _install_claude() {
 }
 
 _install_github_mcp_server() {
-  if has "github-mcp-server"; then
+  if has "github-mcp-server" || [ -x "${LOCAL_BIN}/github-mcp-server" ]; then
     echo "$(tput setaf 2)Already installed github-mcp-server ✔︎$(tput sgr0)"
-  else
-    echo "Installing github-mcp-server..."
-    local tmpdir
-    tmpdir=$(mktemp -d)
-    gh release download \
-      --repo github/github-mcp-server \
-      --pattern "github-mcp-server_Darwin_arm64.tar.gz" \
-      --dir "${tmpdir}"
-    tar -xzf "${tmpdir}/github-mcp-server_Darwin_arm64.tar.gz" -C "${tmpdir}"
-    install -m 755 "${tmpdir}/github-mcp-server" "${LOCAL_BIN}/github-mcp-server"
-    rm -rf "${tmpdir}"
-    echo "$(tput setaf 2)Installed github-mcp-server ✔︎$(tput sgr0)"
+    return
   fi
+
+  if ! has "gh"; then
+    echo "$(tput setaf 1)gh CLI not found; skipping github-mcp-server install$(tput sgr0)"
+    return 1
+  fi
+
+  echo "Installing github-mcp-server..."
+  local tmpdir
+  tmpdir=$(mktemp -d)
+  trap 'rm -rf "${tmpdir}"' EXIT
+
+  gh release download \
+    --repo github/github-mcp-server \
+    --pattern "github-mcp-server_Darwin_arm64.tar.gz" \
+    --dir "${tmpdir}"
+  tar -xzf "${tmpdir}/github-mcp-server_Darwin_arm64.tar.gz" -C "${tmpdir}"
+  install -m 755 "${tmpdir}/github-mcp-server" "${LOCAL_BIN}/github-mcp-server"
+
+  trap - EXIT
+  rm -rf "${tmpdir}"
+  echo "$(tput setaf 2)Installed github-mcp-server ✔︎$(tput sgr0)"
 }
 
 _install_npm_globals() {
+  if ! has "npm"; then
+    echo "$(tput setaf 1)npm not found; skipping npm globals install$(tput sgr0)"
+    return 1
+  fi
+
   local -a desired_packages=(
     '@google/gemini-cli'
     '@openai/codex'
@@ -62,8 +77,8 @@ _install_npm_globals() {
 
   local -a missing_packages=()
   for pkg in "${desired_packages[@]}"; do
-    if echo "${installed}" | grep -q "${pkg}"; then
-      echo "Installed ${pkg}"
+    if echo "${installed}" | grep -q "${pkg}@"; then
+      echo "$(tput setaf 2)Already installed ${pkg} ✔︎$(tput sgr0)"
     else
       missing_packages+=("${pkg}")
     fi
