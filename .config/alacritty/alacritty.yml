@@ -211,6 +211,7 @@ colors:
   selection:
     text: '#eaeaea'
     background: '#404040'
+    save_to_clipboard: true
 
   # Normal colors
   #normal:

@@ -1,0 +1,61 @@
+# Ghostty config — Claude Code 用途中心、長い stream 出力 + 通知 hook 前提
+# 公式 ref: ghostty +show-config / `ghostty +list-themes` で利用可能テーマ確認
+
+# ─── Font ────────────────────────────────────────────────────────
+#font-family = "UDEV Gothic NFLG"
+font-family = "UDEV Gothic 35NFLG"
+font-size = 13
+#font-style = bold
+#font-style = regular
+font-style-italic = italic
+font-thicken = true
+adjust-cell-height = 10%
+grapheme-width-method = unicode
+
+# ─── Theme ───────────────────────────────────────────────────────
+theme = tokyonight
+background = 040032
+background-blur = true
+background-opacity = 0.9
+
+# ─── Window / layout ─────────────────────────────────────────────
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+window-save-state = always
+# Tab を mac native スタイルで
+macos-titlebar-style = transparent
+
+# ─── Cursor ──────────────────────────────────────────────────────
+cursor-style = block
+cursor-style-blink = false
+
+# ─── Shell integration ───────────────────────────────────────────
+# zsh で OSC 133 prompt mark / cmd duration / cwd 共有が効く。
+# Claude Code の hyperlink (file:// / OSC 8) も自動で有効化。
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# ─── Copy / paste ────────────────────────────────────────────────
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+
+# ─── Scrollback ──────────────────────────────────────────────────
+# Claude Code の長い tool 出力を遡れるように余裕を持たせる
+scrollback-limit = 600000
+
+# --- keybinds ----------------------------------------------------
+keybind = shift+enter=text:\n
+
+# ─── Misc ────────────────────────────────────────────────────────
+confirm-close-surface = false
+mouse-hide-while-typing = true
+focus-follows-mouse = false
+
+# bell が必要になったら audible-bell = true に
+# 日本語入力対応
+#ime-preedit-style = true
+
+# ---- config
+env = EDITOR=vim

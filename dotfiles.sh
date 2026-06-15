@@ -21,19 +21,15 @@ Commands:
 
 Arguments:
   -f $(tput setaf 1)** warning **$(tput sgr0) Overwrite dotfiles.
-  -t do tex related operation
   -h Print help (this message)
 EOF
   exit 1
 }
 
-while getopts :f:h opt; do
+while getopts :fh opt; do
   case ${opt} in
     f)
       OVERWRITE=true
-      ;;
-    t)
-      TEX=true
       ;;
     h)
       usage
@@ -69,41 +65,46 @@ if [ ! -d ${DOT_DIRECTORY} ]; then
 fi
 
 cd ${DOT_DIRECTORY}
-#source ./lib/atom
 source ./lib/brew
 source ./lib/python
-#source ./lib/tex
 
 link_files() {
   for f in .??*
   do
-    # Force remove the vim directory if it's already there
+    [[ ${f} = ".git" ]]       && continue
+    [[ ${f} = ".gitignore" ]] && continue
+    [[ ${f} = ".config" ]]    && continue
     [ -n "${OVERWRITE}" -a -e ${HOME}/${f} ] && rm -f ${HOME}/${f}
     if [ ! -e ${HOME}/${f} ]; then
-      # If you have ignore files, add file/directory name here
-      [[ ${f} = ".git" ]] && continue
-      [[ ${f} = ".gitignore" ]] && continue
       ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
     fi
   done
 
+  link_config
+
   echo $(tput setaf 2)Deploy dotfiles complete!. ✔︎$(tput sgr0)
+}
+
+link_config() {
+  local config_src="${DOT_DIRECTORY}/.config"
+  local config_dst="${HOME}/.config"
+  mkdir -p "${config_dst}"
+  for d in "${config_src}"/*/
+  do
+    local name=$(basename "${d}")
+    [ -n "${OVERWRITE}" -a -e "${config_dst}/${name}" ] && rm -rf "${config_dst}/${name}"
+    if [ ! -e "${config_dst}/${name}" ]; then
+      ln -snfv "${config_src}/${name}" "${config_dst}/${name}"
+    fi
+  done
 }
 
 initialize() {
   run_brew
-#  echo "atom"
-#  [ -d ${HOME}/.atom ] && run_atom
-#  echo "tex"
-#  [ -n "${TEX}" ] && run_tex
 
   [ ! -d ${HOME}/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 
   run_python
-
-#  if [ -e ${HOME}/.emacs.d/Cask ]; then
-#    cd ${HOME}/.emacs.d && cask install
-#  fi
 
   echo "$(tput setaf 2)Initialize complete!. ✔︎$(tput sgr0)"
 }
