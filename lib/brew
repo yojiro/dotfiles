@@ -12,6 +12,8 @@ run_brew() {
     echo "Updating Homebrew..."
     brew update && brew upgrade && echo "$(tput setaf 2)Update Homebrew complete. ✔︎$(tput sgr0)"
 
+    brew tap daipeihust/tap
+
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(

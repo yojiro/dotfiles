@@ -60,14 +60,15 @@ _install_github_mcp_server() {
 }
 
 _install_npm_globals() {
-  if ! has "npm"; then
-    echo "$(tput setaf 1)npm not found; skipping npm globals install$(tput sgr0)"
+  if ! has "volta"; then
+    echo "$(tput setaf 1)volta not found; skipping npm globals install$(tput sgr0)"
     return 1
   fi
 
+  volta run node --version &>/dev/null || volta install node
+
   local -a desired_packages=(
     '@google/gemini-cli'
-    '@openai/codex'
     'cccost'
     'ccusage'
   )
