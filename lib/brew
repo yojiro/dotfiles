@@ -71,6 +71,7 @@ run_brew() {
     local -a desired_formulae=(
       'codex'
       'font-hackgen-nerd'
+      'google-chrome'
       'font-plemol-jp-nf'
       'font-ricty-diminished'
       'font-udev-gothic-nf'
@@ -81,6 +82,7 @@ run_brew() {
       'karabiner-elements'
       'ollama-app'
       'tailscale-app'
+      'thaw'
       'visual-studio-code'
       'zoom'
     )
