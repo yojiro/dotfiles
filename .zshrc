@@ -25,6 +25,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 export PIPENV_VENV_IN_PROJECT=1
 
+if command -v pyenv > /dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
 if [[ -o interactive ]]; then
   _xcode_git="$(xcode-select -p 2>/dev/null)/usr/share/git-core"
   [[ -f "$_xcode_git/git-completion.zsh" ]] && zstyle ':completion:*:*:git:*' script "$_xcode_git/git-completion.zsh"
