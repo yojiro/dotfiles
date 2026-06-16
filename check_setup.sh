@@ -49,7 +49,7 @@ check "volta installed"            "command -v volta"
 check "claude installed"           "command -v claude"
 check "github-mcp-server installed" "command -v github-mcp-server"
 check "gemini-cli installed"       "command -v gemini"
-check "codex (npm) installed"      "npm list -g @openai/codex 2>/dev/null | grep -q codex"
+check "codex installed"            "command -v codex"
 check "cccost installed"           "command -v cccost"
 check "ccusage installed"          "command -v ccusage"
 

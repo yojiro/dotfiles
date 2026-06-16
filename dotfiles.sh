@@ -75,7 +75,10 @@ link_files() {
     [[ ${f} = ".git" ]]       && continue
     [[ ${f} = ".gitignore" ]] && continue
     [[ ${f} = ".config" ]]    && continue
-    [ -n "${OVERWRITE}" -a -e ${HOME}/${f} ] && rm -f ${HOME}/${f}
+    [[ ${f} = ".claude" ]]    && continue
+    if [ -n "${OVERWRITE}" ] && { [ -L "${HOME}/${f}" ] || [ -f "${HOME}/${f}" ]; }; then
+      rm -f "${HOME}/${f}"
+    fi
     if [ ! -e ${HOME}/${f} ]; then
       ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
     fi
